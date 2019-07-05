@@ -15,17 +15,47 @@
 
 <body>
 
+  <div class="play" id="play">
 
-  <div class="play">
-    <div>PLAYER = <span id="user"></span></div>
-    <div>COOKIE = <span id="cookie"></span></div>
+    <div>PLAYER = <span id="player"></span></div>
+    <div>SESSIONID = <span id="cookie"></span></div>
     <button id="logout">LogOut</button>
+    <button id="getSecret">Get Secret</button>
+    <div id="secret"></div>
+
   </div>
 
+  <div class="login-page">
+
+    <div class="form">
+      <div class="title">
+        <img alt="logo" class="verticalImage" src="https://commandatspace.com/assets/icons/space64.png">
+        <strong>COMMAND AT SPACE</strong>
+      </div>
+      <br>
+      <form class="registerForm">
+        <input id="user1" type="text" placeholder="username" />
+        <input id="pass1" type="password" placeholder="password" />
+        <input id="mail1" type="text" placeholder="email address" />
+        <button id="create">create</button>
+        <p class="message">Already registered?
+          <span class="fakeLink">Sign In</span>
+        </p>
+      </form>
+      <form class="loginForm">
+        <input id="user2" type="text" placeholder="username" />
+        <input id="pass2" type="password" placeholder="password" />
+        <button id="login">login</button>
+        <p class="message">Not registered?
+          <span class="fakeLink">Create an account</span>
+        </p>
+      </form>
+
+    </div>
+  </div>
 
 </body>
 
-<script src="lib.js"></script>
-<script src="play.js"></script>
+<script type="module" src="play.js"></script>
 
 </html>
