@@ -6,21 +6,22 @@ import { conf } from "./_config.js";
 import doRequest from "./_lib/net.js";
 
 function showLogged(logged) {
-  //console.log(logged);
+  console.log(logged);
   //console.log('Show Logged');
-  document.getElementById("play").style.display = "block";
+  document.getElementById("logged").style.display = "block";
   document.getElementsByClassName("login-page")[0].style.display = "none";
 
   //console.log(getCookie("alpha"));
+  const cookieName = "alpha";
   document.getElementById("player").innerHTML = logged.profile.name;
-  document.getElementById("cookie").innerHTML = auth.getCookie("alpha");
+  document.getElementById("cookie").innerHTML = auth.getCookie(cookieName);
   document.getElementById("logout").addEventListener("click", auth.doLogout);
   document.getElementById("getSecret").addEventListener("click", getSecret);
 }
 
 function showCreateAccount() {
   //console.log('Show Create Account');
-  document.getElementById("play").style.display = "none";
+  document.getElementById("logged").style.display = "none";
   document.getElementsByClassName("login-page")[0].style.display = "block";
   document.getElementsByClassName("registerForm")[0].style.display = "block";
   document.getElementsByClassName("loginForm")[0].style.display = "none";
@@ -28,7 +29,7 @@ function showCreateAccount() {
 
 function showSignIn() {
   //console.log('Sign In');
-  document.getElementById("play").style.display = "none";
+  document.getElementById("logged").style.display = "none";
   document.getElementsByClassName("login-page")[0].style.display = "block";
   document.getElementsByClassName("registerForm")[0].style.display = "none";
   document.getElementsByClassName("loginForm")[0].style.display = "block";

@@ -4,7 +4,7 @@
 import { gameUrl } from "./_private.js";
 
 const conf = {
-  mode: "dev2",
+  mode: "dev",
   //urlBase: getUrlBase()
 };
 
@@ -12,7 +12,7 @@ conf.urlBase = getUrlBase();
 
 function getUrlBase() {
   if (conf.mode === "dev") {
-    return "http://localhost:3000";
+    return "http://localhost:7000";
   } else {
     return gameUrl;
   }

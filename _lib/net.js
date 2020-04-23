@@ -6,6 +6,7 @@ import { showError } from "./lib.js";
 export default function doRequest(url, action, params, sendCookie, callback) {
   const xhr = new XMLHttpRequest();
   xhr.onreadystatechange = function () {
+    console.log(url);
     //console.log("STATUS ===>>>", xhr.status);
     if (xhr.readyState === 4) { // 4 = "DONE"
       if (xhr.status === 200) { // 200 ="OK"
@@ -20,7 +21,7 @@ export default function doRequest(url, action, params, sendCookie, callback) {
           callback(xhr.status);
         }
       } else {
-        console.error("Error:" + xhr.status + "=>", xhr.responseText.length);
+        console.error("Error:" + xhr.status + "=>", xhr.responseText);//.length);
         if (xhr.status !== 0 && xhr.status !== 502) {
           showError(JSON.parse(xhr.responseText));
         } else {

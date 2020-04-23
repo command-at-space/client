@@ -5,11 +5,11 @@ import doRequest from "./net.js";
 import { conf } from "../_config.js";
 import { showLogged, showSignIn } from "./../router.js";
 
-function doResign() {
-  //console.log('doResign');
+function doAutoLogin() {
+  //console.log('doAutoLogin');
   return new Promise(function doSaltAndHash(resolve, reject) {
-    let urlData = conf.urlBase + "/resign";
-    doRequest(urlData, "POST", undefined, true, function doneResign(info) {
+    let urlData = conf.urlBase + "/auth/autoLogin";
+    doRequest(urlData, "POST", undefined, true, function doneAutoLogin(info) {
       info = JSON.parse(info);
       resolve(info);
     });
@@ -19,7 +19,7 @@ function doResign() {
 function doLogin(user, pass, e) {
   //console.log('doLogin');
   e.preventDefault();
-  let urlData = conf.urlBase + "/login";
+  let urlData = conf.urlBase + "/auth/login";
 
   let formBody = "";
   const k1 = encodeURIComponent("user");
@@ -29,6 +29,7 @@ function doLogin(user, pass, e) {
   formBody = k1 + "=" + v1 + "&" + k2 + "=" + v2;
   doRequest(urlData, "POST", formBody, true, function logged(data) {
     data = JSON.parse(data);
+    console.log('User Data =>', data);
     if (data.isLogged === true) {
       showLogged(data);
     }
@@ -37,7 +38,7 @@ function doLogin(user, pass, e) {
 
 function doCreate(e) {
   e.preventDefault();
-  let urlData = conf.urlBase + "/signup";
+  let urlData = conf.urlBase + "/auth/signup";
 
   const user = document.getElementById("user1").value;
   const pass = document.getElementById("pass1").value;
@@ -58,9 +59,10 @@ function doCreate(e) {
 
 function doLogout() {
   //console.log('LOGOUT');
-  let url = conf.urlBase + "/logout";
+  let url = conf.urlBase + "/auth/logout";
   doRequest(url, "POST", null, true, function (data) {
     data = JSON.parse(data);
+    console.log('LogOut', data);
     showSignIn();
   });
 }
@@ -75,7 +77,7 @@ function getCookie(name) {
 }
 
 export {
-  doResign,
+  doAutoLogin,
   doLogin,
   doCreate,
   doLogout,

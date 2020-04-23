@@ -3,8 +3,8 @@
 
 function showError(dataError) {
   console.log("dataError => ", dataError);
-  if (dataError.error) {
-    alert(dataError.error);
+  if (dataError.message) {
+    alert(dataError.message);
   } else {
     alert("An error has ocurred while fetching data");
   }
