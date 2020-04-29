@@ -1,24 +1,28 @@
 /* */
 "use strict";
 
-import { gameUrl } from "./_private.js";
-
 const conf = {
   mode: "dev",
-  //urlBase: getUrlBase()
+  anonymousPrefix: "tmp_"
+  //apiUrlBase: getapiUrlBase()
 };
 
-conf.urlBase = getUrlBase();
+conf.apiUrlBase = getapiUrlBase();
 
-function getUrlBase() {
+function getapiUrlBase() {
   if (conf.mode === "dev") {
-    return "http://localhost:7000";
+    return "http://localhost:6900";
   } else {
-    return gameUrl;
+    return "https://commandatspace.com/api/v0";
   }
 }
 
 export {
   conf
 };
+
+/*
+use localhost
+with 127.0.0.1 cant see cookies value
+*/
 

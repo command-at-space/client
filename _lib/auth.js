@@ -1,85 +1,62 @@
 /* */
 "use strict";
 
-import doRequest from "./net.js";
-import { conf } from "../_config.js";
-import { showLogged, showSignIn } from "./../router.js";
-
-function doAutoLogin() {
-  //console.log('doAutoLogin');
-  return new Promise(function doSaltAndHash(resolve, reject) {
-    let urlData = conf.urlBase + "/auth/autoLogin";
-    doRequest(urlData, "POST", undefined, true, function doneAutoLogin(info) {
-      info = JSON.parse(info);
-      resolve(info);
-    });
-  });
-}
-
-function doLogin(user, pass, e) {
-  //console.log('doLogin');
-  e.preventDefault();
-  let urlData = conf.urlBase + "/auth/login";
-
-  let formBody = "";
-  const k1 = encodeURIComponent("user");
-  const k2 = encodeURIComponent("pass");
-  const v1 = encodeURIComponent(user);
-  const v2 = encodeURIComponent(pass);
-  formBody = k1 + "=" + v1 + "&" + k2 + "=" + v2;
-  doRequest(urlData, "POST", formBody, true, function logged(data) {
-    data = JSON.parse(data);
-    console.log('User Data =>', data);
-    if (data.isLogged === true) {
-      showLogged(data);
+export default function doAuthRequest(url, action, params, sendCookie, callback) {
+  const xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function () {
+    //console.log(url);
+    //console.log("STATUS ===>>>", xhr.status);
+    if (xhr.readyState === 4) { // 4 = "DONE"
+      if (xhr.status === 200) { // 200 ="OK"
+        if (action === "GET" || action === "POST") {
+          try {
+            callback(/*JSON.parse*/xhr.responseText);
+          } catch (e) {
+            //console.error("Error parsing Json => ", e);
+            callback({});
+          }
+        } else {
+          callback(xhr.status);
+        }
+      } else {
+        console.error("Error:" + xhr.status + "=>", xhr.responseText);//.length);
+        if (xhr.status !== 0 && xhr.status !== 502) {
+          showError(JSON.parse(xhr.responseText));
+        } else {
+          showError(xhr.responseText);
+        }
+      }
     }
-  });
-}
-
-function doCreate(e) {
-  e.preventDefault();
-  let urlData = conf.urlBase + "/auth/signup";
-
-  const user = document.getElementById("user1").value;
-  const pass = document.getElementById("pass1").value;
-  const mail = document.getElementById("mail1").value;
-
-  let formBody = "";
-  const k1 = encodeURIComponent("user");
-  const k2 = encodeURIComponent("pass");
-  const k3 = encodeURIComponent("mail");
-  const v1 = encodeURIComponent(user);
-  const v2 = encodeURIComponent(pass);
-  const v3 = encodeURIComponent(mail);
-  formBody = k1 + "=" + v1 + "&" + k2 + "=" + v2 + "&" + k3 + "=" + v3;
-  doRequest(urlData, "POST", formBody, true, function created(data) {
-    doLogin(user, pass, e);
-  });
-}
-
-function doLogout() {
-  //console.log('LOGOUT');
-  let url = conf.urlBase + "/auth/logout";
-  doRequest(url, "POST", null, true, function (data) {
-    data = JSON.parse(data);
-    console.log('LogOut', data);
-    showSignIn();
-  });
-}
-
-function getCookie(name) {
-  var value = "; " + decodeURIComponent(document.cookie);
-  var parts = value.split("; " + name + "=");
-  if (parts.length == 2) {
-    return parts.pop().split(";").shift();
+  };
+  xhr.open(action, url);
+  if (sendCookie) {
+    //console.log('SEND COOKIES');
+    xhr.withCredentials = true; // allow send cookies
   }
-  return value;
+  if (action === "GET") {
+    xhr.send();
+  } else if (action !== "GET") {
+    xhr.setRequestHeader(
+      "Content-Type",
+      "application/x-www-form-urlencoded; charset=UTF-8"
+    );
+    //xhr.setRequestHeader("Content-type", 'multipart/form-data');
+    if (params) {
+      //console.log('Send =>', params);
+      xhr.send(params);
+    } else {
+      xhr.send();
+    }
+    // console.log('Request Sent')
+  }
 }
 
-export {
-  doAutoLogin,
-  doLogin,
-  doCreate,
-  doLogout,
-  getCookie
-};
+function showError(dataError) {
+  console.log("dataError => ", dataError);
+  if (dataError.message) {
+    alert(dataError.message);
+  } else {
+    alert("An error has ocurred while fetching data");
+  }
+}
+

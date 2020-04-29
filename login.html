@@ -23,6 +23,8 @@
     <button id="getSecret">Get Secret</button>
     <div id="secret"></div>
 
+    <a href="./play.html">PLAY</a>
+
   </div>
 
   <div class="login-page">
@@ -33,21 +35,52 @@
         <strong>COMMAND AT SPACE</strong>
       </div>
       <br>
+
       <form class="registerForm">
-        <input id="user1" type="text" placeholder="username" />
-        <input id="pass1" type="password" placeholder="password" />
-        <input id="mail1" type="text" placeholder="email address" />
+        <input id="user1" type="text" placeholder="*username">
+        <p class="explanation"><b>4-16. Any combination of letters and numbers</b></p>
+        <input id="pass1" type="password" placeholder="*password">
+        <p class="explanation"><b>8-20 length. Any character</b></p>
+        <input id="mail1" type="text" placeholder="email address">
+        <p class="explanation"><b>enter a valid mail</b></p>
+        <input id="logo1" type="text" placeholder="logo">
+        <p class="explanation"><b>url to image</b></p>
+        <input id="ques1" type="text" placeholder="secret question">
+        <p class="explanation"><b>max 90 characters</b></p>
+        <input id="secr1" type="text" placeholder="secret response">
+        <p class="explanation"><b>max 20 characters</b></p>
+        <p class="message"><b>*required</b></p>
         <button id="create">create</button>
-        <p class="message">Already registered?
-          <span class="fakeLink">Sign In</span>
+        <p class="message"><b>Already registered?</b>
+          <span class="fakeLink"><b>Sign In</b></span>
+        </p>
+        <p class="message"><b>I want to play without creating an account yet</b>
+          <span class="fakeLink"><b>Play anonymous</b></span>
         </p>
       </form>
+
       <form class="loginForm">
-        <input id="user2" type="text" placeholder="username" />
-        <input id="pass2" type="password" placeholder="password" />
+        <input id="user2" type="text" placeholder="*username" />
+        <input id="pass2" type="password" placeholder="*password" />
         <button id="login">login</button>
-        <p class="message">Not registered?
-          <span class="fakeLink">Create an account</span>
+        <p class="message"><b>Not registered?</b>
+          <span class="fakeLink"><b>Create an account</b></span>
+        </p>
+        <p class="message"><b>I want to play without creating an account yet</b>
+          <span class="fakeLink"><b>Play anonymous</b></span>
+        </p>
+      </form>
+
+      <form class="anonymousForm">
+        <input id="user3" type="text" placeholder="*username" />
+        <p class="explanation"><b>4-8. Any combination of letters and numbers. Prefix tmp_ will be added</b></p>
+        <p class="message"><b>*required</b></p>
+        <button id="anonymous">Play anonymous</button>
+        <p class="message"><b>Not registered?</b>
+          <span class="fakeLink"><b>Create an account</b></span>
+        </p>
+        <p class="message"><b>Already registered?</b>
+          <span class="fakeLink"><b>Sign In</b></span>
         </p>
       </form>
 
@@ -56,6 +89,6 @@
 
 </body>
 
-<script type="module" src="login.js"></script>
+<script type="module" src="./login/login.js"></script>
 
 </html>
