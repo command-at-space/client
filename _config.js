@@ -2,10 +2,11 @@
 "use strict";
 
 const conf = {
-  mode: "dev2",
+  mode: "dev",
   anonymousPrefix: "tmp_",
   apiUrlBase: "",
   websocketUrl: "",
+  cookieName: "alphaCAS"
 };
 
 conf.apiUrlBase = getapiUrlBase();

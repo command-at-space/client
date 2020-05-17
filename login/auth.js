@@ -12,7 +12,7 @@ function doAutoLogin() {
     let urlData = conf.apiUrlBase + "/auth/autoLogin";
     doAuthRequest(urlData, "POST", undefined, true, function doneAutoLogin(info) {
       info = JSON.parse(info);
-      console.log('User Data =>', info);
+      //console.log('User Data =>', info);
       resolve(info);
     });
   });
@@ -31,7 +31,7 @@ function doLogin(user, pass, e) {
   formBody = k1 + "=" + v1 + "&" + k2 + "=" + v2;
   doAuthRequest(urlData, "POST", formBody, true, function logged(data) {
     data = JSON.parse(data);
-    console.log('User Data =>', data);
+    //console.log('User Data =>', data);
     if (data.isLogged === true) {
       showLogged(data);
     }

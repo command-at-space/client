@@ -6,13 +6,11 @@ import { conf } from "../_config.js";
 import doAuthRequest from "../_lib/auth.js";
 
 function showLogged(logged) {
-  //console.log(logged);
-  //console.log('Show Logged');
+  console.log('Show Logged', logged);
   document.getElementById("logged").style.display = "block";
   document.getElementsByClassName("login-page")[0].style.display = "none";
-
-  //console.log(getCookie("alpha"));
-  const cookieName = "alphaCAS";
+  const cookieName = conf.cookieName;
+  console.log(cookieName);
   document.getElementById("player").innerHTML = logged.profile.nick;
   document.getElementById("cookie").innerHTML = auth.getCookie(cookieName);
   document.getElementById("logout").addEventListener("click", auth.doLogout);
@@ -38,7 +36,7 @@ function showSignIn() {
 }
 
 function showPlayAnonymous() {
-  console.log('Play Anonymous');
+  //console.log('Play Anonymous');
   document.getElementById("logged").style.display = "none";
   document.getElementsByClassName("login-page")[0].style.display = "block";
   document.getElementsByClassName("registerForm")[0].style.display = "none";

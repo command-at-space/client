@@ -1,14 +1,14 @@
 /*  */
 "use strict";
 
-import { profile } from "./login.js";
-import { conf } from "./../_config.js";
+import { profile } from "../login.js";
+import { conf } from "../../_config.js";
 
 let socket;
 
 export default async function startChat() {
   document.getElementById("send").addEventListener("click", send);
-  console.log(conf);
+  //console.log(conf);
   socket = new WebSocket(conf.websocketUrl);
 
   console.log("Connected ->", profile.nick);

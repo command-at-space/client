@@ -7,7 +7,7 @@ import doAuthRequest from "../_lib/auth.js";
 export let profile = {};
 
 function doAutoLogin() {
-  console.log('doAutoLogin');
+  //console.log('doAutoLogin');
   return new Promise(function doSaltAndHash(resolve) {
     let urlData = conf.apiUrlBase + "/online/join";
     doAuthRequest(urlData, "POST", undefined, true, function doneAutoLogin(info) {
@@ -36,3 +36,4 @@ export default async function doGameLogin() {
     history.replaceState({}, null, "/play.html"); // hide url parameters
   }
 }
+

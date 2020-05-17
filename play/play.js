@@ -2,7 +2,7 @@
 "use strict";
 
 import doGameLogin from "./login.js";
-import startChat from "./chat.js";
+import startChat from "./chat/chat.js";
 
 async function init() {
   //console.log('1');
