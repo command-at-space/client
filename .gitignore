@@ -6,9 +6,12 @@ tmp/
 _data/
 
 # Ignore these files
+.air.conf
 .env
-.DS_Store
-_private.js
+a_private.go
 _private.json
+_private.js
+go.sum
 
-
+# Ignore binaries
+cas
